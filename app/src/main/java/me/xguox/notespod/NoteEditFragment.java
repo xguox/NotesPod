@@ -27,6 +27,8 @@ public class NoteEditFragment extends Fragment {
     private AlertDialog categoryDialogObject, confirmDialogObject;
     private static final String MODIFIED_CATEGORY = "Modified Category";
 
+    private boolean newNote = false;
+
     public NoteEditFragment() {
         // Required empty public constructor
     }
@@ -35,6 +37,12 @@ public class NoteEditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Bundle bundle = this.getArguments();
+
+        if (bundle != null) {
+            newNote = bundle.getBoolean(NoteDetailActivity.NEW_NOTE_EXTRA, false);
+        }
 
         if (savedInstanceState != null) {
             savedBtnCategory = (Note.Category) savedInstanceState.get(MODIFIED_CATEGORY);
@@ -48,17 +56,16 @@ public class NoteEditFragment extends Fragment {
         saveButton = (Button) fragmentLaout.findViewById(R.id.saveNote);
 
         Intent intent = getActivity().getIntent();
-        title.setText(intent.getExtras().getString(MainActivity.NOTE_TITLE_EXTRA));
-        message.setText(intent.getExtras().getString(MainActivity.NOTE_MESSAGE_EXTRA));
+        title.setText(intent.getExtras().getString(MainActivity.NOTE_TITLE_EXTRA, ""));
+        message.setText(intent.getExtras().getString(MainActivity.NOTE_MESSAGE_EXTRA, ""));
 
         if (savedBtnCategory != null) {
             noteCatBtn.setImageResource(Note.categoryToDrawable(savedBtnCategory));
-        } else {
+        } else if (!newNote) {
             Note.Category noteCat = (Note.Category) intent.getSerializableExtra(MainActivity.NOTE_CATEGORY_EXTRA);
             savedBtnCategory = noteCat;
             noteCatBtn.setImageResource(Note.categoryToDrawable(noteCat));
         }
-
 
         buildCategoryDialog();
         buildConfirmDialog();

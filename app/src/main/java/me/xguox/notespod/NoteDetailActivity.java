@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 public class NoteDetailActivity extends AppCompatActivity {
 
+    public static final String NEW_NOTE_EXTRA = "NEW NOTE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,17 @@ public class NoteDetailActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         switch (fragmentToLaunch) {
+            case CREATE:
+                NoteEditFragment noteCreateFragment = new NoteEditFragment();
+                setTitle(R.string.create_fragment_title);
+
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(NEW_NOTE_EXTRA, true);
+                noteCreateFragment.setArguments(bundle);
+
+                fragmentTransaction.add(R.id.note_container, noteCreateFragment, "NOTE_CREATE_FRAGMENT");
+                break;
+
             case EDIT:
                 NoteEditFragment noteEditFragment = new NoteEditFragment();
                 setTitle(R.string.edit_fragment_title);
