@@ -5,7 +5,12 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -57,16 +62,42 @@ public class MainActivityListFragment extends ListFragment {
 
         noteAdapter = new NoteAdapter(getActivity(), notes);
         setListAdapter(noteAdapter);
+
+        registerForContextMenu(getListView());
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        launchNoteDetailActivity(position);
+        launchNoteDetailActivity(MainActivity.FragmentToLaunch.VIEW, position);
     }
 
-    private void launchNoteDetailActivity(int position) {
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int rowPosition = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.edit:
+                launchNoteDetailActivity(MainActivity.FragmentToLaunch.EDIT, rowPosition);
+                Log.d("Menu Clicked!", "We press edit!");
+                return true;
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater menuInflater = getActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.long_press_menu, menu);
+    }
+
+    private void launchNoteDetailActivity(MainActivity.FragmentToLaunch ftl, int position) {
         Note note = (Note) getListAdapter().getItem(position);
 
         Intent intent = new Intent(getActivity(), NoteDetailActivity.class);
@@ -74,6 +105,15 @@ public class MainActivityListFragment extends ListFragment {
         intent.putExtra(MainActivity.NOTE_TITLE_EXTRA, note.getTitle());
         intent.putExtra(MainActivity.NOTE_MESSAGE_EXTRA, note.getMessage());
         intent.putExtra(MainActivity.NOTE_CATEGORY_EXTRA, note.getCategory());
+
+        switch(ftl) {
+            case VIEW:
+                intent.putExtra(MainActivity.NOTE_FRAGMENT_TO_LOAD_EXTRA, MainActivity.FragmentToLaunch.VIEW);
+                break;
+            case EDIT:
+                intent.putExtra(MainActivity.NOTE_FRAGMENT_TO_LOAD_EXTRA, MainActivity.FragmentToLaunch.EDIT);
+                break;
+        }
 
         startActivity(intent);
     }

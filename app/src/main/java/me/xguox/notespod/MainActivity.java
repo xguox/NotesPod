@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String NOTE_TITLE_EXTRA = "Note Title";
     public static final String NOTE_MESSAGE_EXTRA = "Note Message";
     public static final String NOTE_CATEGORY_EXTRA = "Note Category";
+    public static final String NOTE_FRAGMENT_TO_LOAD_EXTRA = "Fragment To Load";
+
+    public enum FragmentToLaunch { VIEW, EDIT }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
