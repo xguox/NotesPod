@@ -11,4 +11,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="save_note_btn">Save it</string>
     <string name="create_fragment_title">Create Note</string>
+    <string name="title_preferences">Preferences</string>
 </resources>

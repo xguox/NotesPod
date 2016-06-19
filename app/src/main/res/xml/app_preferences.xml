@@ -4,7 +4,19 @@
         android:title="General">
 
         <EditTextPreference
-            android:title="Notespod Title"
-            android:
+            android:title="Notebook Title"
+            android:summary="Main action bar title"
+            android:key="title"
+            android:defaultValue="Notespod" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Color">
+
+        <CheckBoxPreference
+            android:title="Dark Backgroud"
+            android:summary="Main Background color is Dark?"
+            android:key="background_color"
+            android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>
