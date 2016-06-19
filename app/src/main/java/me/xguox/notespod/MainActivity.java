@@ -17,11 +17,11 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String NOTE_ID_EXTRA = "Note Identifier";
-    public static final String NOTE_TITLE_EXTRA = "Note Title";
-    public static final String NOTE_MESSAGE_EXTRA = "Note Message";
-    public static final String NOTE_CATEGORY_EXTRA = "Note Category";
-    public static final String NOTE_FRAGMENT_TO_LOAD_EXTRA = "Fragment To Load";
+    public static final String NOTE_ID_EXTRA = "me.xguox.notespod.NoteIdentifier";
+    public static final String NOTE_TITLE_EXTRA = "me.xguox.notespod.NoteTitle";
+    public static final String NOTE_MESSAGE_EXTRA = "me.xguox.notespod.NoteMessage";
+    public static final String NOTE_CATEGORY_EXTRA = "me.xguox.notespod.NoteCategory";
+    public static final String NOTE_FRAGMENT_TO_LOAD_EXTRA = "me.xguox.notespod.FragmentToLoad";
 
     public enum FragmentToLaunch { VIEW, EDIT, CREATE }
 

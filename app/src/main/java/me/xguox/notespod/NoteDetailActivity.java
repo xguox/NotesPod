@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 public class NoteDetailActivity extends AppCompatActivity {
 
-    public static final String NEW_NOTE_EXTRA = "NEW NOTE";
+    public static final String NEW_NOTE_EXTRA = "me.xguox.notespod.NewNote";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
