@@ -69,6 +69,10 @@ public class DbAdapter {
         return newNote;
     }
 
+    public long deleteNote(long idToDelete) {
+        return mSQLiteDatabase.delete(NOTE_TABLE, ID + " = " + idToDelete, null);
+    }
+
     public long updateNote(long idToUpdate, String newTitle, String newMessage, Note.Category newCategory) {
         ContentValues values = new ContentValues();
 

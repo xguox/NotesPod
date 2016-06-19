@@ -6,6 +6,7 @@
     <string name="view_fragment_title">This note is</string>
     <string name="edit_fragment_title">Edit this note</string>
     <string name="edit_menu">Edit</string>
+    <string name="delete_menu">Delete!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="save_note_btn">Save it</string>
